@@ -6,7 +6,7 @@ router.use(cors());
 router.use("/user", require("./users"));
 
 
-// Default Routers
+// default
 router.get("/", function (req, res) {
   res.json({
     status: "Server responding",
