@@ -1,9 +1,16 @@
+require("dotenv").config();
+require("./config/database").connect();
 const http = require("http");
-const app = require("./app");
+const express = require("express");
+const app = express();
 const server = http.createServer(app);
 
-const { API_PORT } = process.env;
-const port = process.env.PORT || API_PORT;
+app.use(express.json());
+
+app.use(require("./controllers"))
+
+// setting port
+const port = process.env.PORT || 4000;
 
 // server listening
 server.listen(port, () => {
