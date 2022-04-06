@@ -66,8 +66,7 @@ router.post("/login", async (req, res) => {
     const user = await User.findOne({ email });
 
     if (user && (await bcrypt.compare(password, user.password))) {
-      
-     // create token
+      // create token
       const token = jwt.sign(
         { user_id: user._id, email },
         process.env.TOKEN_KEY,
@@ -79,7 +78,6 @@ router.post("/login", async (req, res) => {
       // save user token
       user.token = token;
 
-      // user
       return res.status(200).json(user);
     }
     return res.status(400).send("Invalid Credentials");
