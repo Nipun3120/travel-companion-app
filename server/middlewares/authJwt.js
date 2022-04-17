@@ -17,7 +17,7 @@ const verifyToken = (req, res, next) => {
      // access token from client
      token = token.split(" ")[1];    
      if (!token) {
-       return res.status(403).send({ message: "No token provided!" });
+       return res.status(403).send({ message: "Unauthorized, please login first" });
      }
      jwt.verify(token, config.TOKEN.ACCESS_SECRET, (err, user) => {
        if (err) {

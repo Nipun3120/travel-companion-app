@@ -60,8 +60,8 @@ router.post("/login", async (req, res) => {
       let refreshToken = createToken({uid: user._id}, config.TOKEN.REFRESH_SECRET, config.TIME.jwtRefreshExpiration)
 
       refreshTokens.push(refreshToken)
-        
-      return res.status(200).json({ accessToken, refreshToken });
+      const uid = user._id;
+      return res.status(200).json({ accessToken, refreshToken,  uid});
     }
     return res.status(400).send("Invalid Credentials");
   } catch (err) {
@@ -70,7 +70,12 @@ router.post("/login", async (req, res) => {
 });
 
 router.post("/protected-route", verifyToken, (req, res) => {
-  res.status(200).json({ user: req.user });
+
+  User.findById(req.user.uid, (err, user)=> {
+    if(err) res.status(404).json({message: "User not found"})
+    res.status(200).json({ uid: req.user.uid, user});
+  })
+
 });
 
 router.post("/renew-access-token", (req, res) => {
@@ -95,6 +100,15 @@ router.post("/renew-access-token", (req, res) => {
 });
 
 
+router.get("/getUserFromId", verifyToken, (req, res)=> {
+    if(req.user.uid !== req.body.uid) res.status(400).json({message: "user not verified"})
+    else {
+      User.findById(req.body.uid, (err, user)=> {
+        if(err) res.status(404).json({message: "User not found"})
+        else res.status(200).json({user})
+      })
+    }
+});
 
 router.get("/get-all-users", async(req, res)=> {
   let data = await User.find();
