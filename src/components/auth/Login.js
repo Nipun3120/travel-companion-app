@@ -57,18 +57,19 @@ export const Login = () => {
 
     if (userName !== "" && password !== "") {
       console.log(newCredentials);
-      // try{
-      //     axios({
-      //         method: 'post',
-      //         url: 'http://localhost:3030/accounts/login',
-      //         data: newCredentials
-      //     }).then(res => {
-      //         localStorage.setItem("accessToken", res.data.accessToken)
-      //         setLoggedIn(true)
-      //     })
-      // } catch(error) {
-      //     console.log(error)
-      // }
+      try{
+          axios({
+              method: 'post',
+              url: 'http://localhost:3030/user/login',
+              data: newCredentials
+          }).then(res => {
+              localStorage.setItem("refreshToken", res.data.accessToken)
+              console.log(res.data)
+              setLoggedIn(true)
+          })
+      } catch(error) {
+          console.log(error)
+      }
     } else {
       setHelperText("missing credentials");
     }

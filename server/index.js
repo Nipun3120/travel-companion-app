@@ -5,7 +5,7 @@ const express = require("express");
 const app = express();
 const server = http.createServer(app);
 
-app.use(express.json());
+app.use(express.json({strict: true}));
 
 app.use(require("./controllers"))
 
