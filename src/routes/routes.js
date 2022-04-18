@@ -3,10 +3,6 @@ import { Route, Routes } from "react-router-dom";
 import { Home, Signup } from "../components";
 import { Login } from "../components/auth/Login";
 
-// export default function routeComponents() {
-//   return getRouteOrLogin(getAppropriateRoutes());
-// }
-
 export const getAppropriateRoutes = () => {
   return (
     <Routes>
@@ -16,14 +12,3 @@ export const getAppropriateRoutes = () => {
     </Routes>
   );
 }
-
-// const getRouteOrLogin = (component) => {
-//   return localStorage.getItem("uid") ? (
-//     component
-//   ) : (
-//     <Routes>
-
-//     </Routes>
-//     );
-//   }
-  
