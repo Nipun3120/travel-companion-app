@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate, Link, useLocation, Navigate } from "react-router-dom";
 import axios from "axios";
+import { BASE_URL } from "../../config/api";
 import FormControl from "@mui/material/FormControl";
 import InputLabel from "@mui/material/InputLabel";
 import OutlinedInput from "@mui/material/OutlinedInput";
@@ -12,68 +13,43 @@ import { Container } from "@mui/material";
 import { Box } from "@mui/system";
 
 import { LockClosedIcon } from '@heroicons/react/solid'
+import { login } from "../../api/user";
 
 export const Login = () => {
   const { currentUser, setCurrentUser } = useCurrentUserContext();
   const { isLoggedIn, setLoggedIn } = useLoggedInStatus();
-  const navigate = useNavigate();
+  let navigate = useNavigate();
+  let location = useLocation();
 
-  const [userName, setUserName] = useState("");
+  let from = location.state?.from?.pathname || "/";
+
+  const [email, setUserName] = useState("");
   const [password, setPassword] = useState("");
   const [helperText, setHelperText] = useState("");
 
-  // const token = localStorage.getItem("accessToken")
-
-  // useEffect(()=> {
-  //     if(token) {
-  //         axios({
-  //             method:'get',
-  //             url:'http://localhost:3030/accounts/token',
-  //             headers:{
-  //                 "Authorization": `Bearer ${token}`
-  //             }
-  //         }).then(res => {
-
-  //         const credential  = res.data.id;
-  //         setCurrentUser(credential.userName)
-  //         navigate('/chat')
-  //         setHelperText('')
-
-  //     })}
-  // }, [isLoggedIn])
-
-  console.log("from login user: " + currentUser);
-
   const handleNameChange = (e) => {
+    e.preventDefault();
     setUserName(e.target.value);
   };
   const handlePasswordChange = (e) => {
+    e.preventDefault()
     setPassword(e.target.value);
   };
 
+  console.log("fromm", from)
   const checkCredentials = async () => {
-    // localStorage.removeItem("accessToken")
-    const newCredentials = { userName, password };
-
-    if (userName !== "" && password !== "") {
-      console.log(newCredentials);
-      try{
-          axios({
-              method: 'post',
-              url: 'http://localhost:3030/user/login',
-              data: newCredentials
-          }).then(res => {
-              localStorage.setItem("refreshToken", res.data.accessToken)
-              console.log(res.data)
-              setLoggedIn(true)
-          })
-      } catch(error) {
-          console.log(error)
-      }
+    const newCredentials = { email, password };
+    if (email !== "" && password !== "") {
+      // ----- set loading true here ------
+      login(newCredentials)
+      setLoggedIn(true)
+      navigate(from, { replace: true });
+      // return <Navigate to="/" state={{ from: location }} replace />
     } else {
       setHelperText("missing credentials");
     }
   };
+
   return (
     <>
       <div className="min-h-full flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
