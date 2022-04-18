@@ -17,7 +17,7 @@ router.post("/register", async (req, res) => {
   try {
     const { firstName, lastName, email, password } = req.body;
     if (!(email && password && firstName && lastName)) {
-      res.status(400).send("All input is required");
+      return res.status(400).send("All input is required");
     }
 
     const oldUser = await User.findOne({ email });
@@ -36,7 +36,7 @@ router.post("/register", async (req, res) => {
       //  _id: uid(16),
     });
 
-    res.status(201).json(user);
+    return res.status(201).json(user);
   } catch (err) {
     console.log(err);
   }
@@ -49,9 +49,8 @@ router.post("/login", async (req, res) => {
 
     // validating input
     if (!(email && password)) {
-      res.status(400).send("All input is required");
+      return res.status(400).send("All input is required");
     }
-
     const user = await User.findOne({ email });
     console.log(user)
     if (user && (await bcrypt.compare(password, user.password))) {
