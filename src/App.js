@@ -1,17 +1,15 @@
-import './App.css';
+import "./App.css";
 import { Routes, Route } from "react-router-dom";
-import { Home, Login, Signup } from './components';
+import { Home, Login, Signup } from "./components";
+import { Container } from "@mui/material";
+import routeComponents, { getAppropriateRoutes } from "./routes/routes";
 
 function App() {
   return (
     <div className="App">
-      {/* <header className="App-header"> */}
-      <Routes>
-        <Route path="/" element={<Home/>}/>
-        <Route path="/login" element={<Login/>}/>
-        <Route path="/signup" element={<Signup/>}/>
-      </Routes>
-      {/* </header> */}
+      {/* <header className="App-header"></header> */}
+      {/* <Container>{routeComponents()}</Container> */}
+      <Container>{getAppropriateRoutes()}</Container>
     </div>
   );
 }
