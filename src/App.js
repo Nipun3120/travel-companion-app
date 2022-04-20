@@ -9,7 +9,7 @@ function App() {
     <div className="App">
       {/* <header className="App-header"></header> */}
       {/* <Container>{routeComponents()}</Container> */}
-      <Container>{getAppropriateRoutes()}</Container>
+      <>{getAppropriateRoutes()}</>
     </div>
   );
 }

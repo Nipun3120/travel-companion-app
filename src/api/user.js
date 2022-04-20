@@ -1,7 +1,7 @@
 import axios from "axios";
 import { BASE_URL } from "../config/api";
 
-const login = (data) => {
+const login = async (data) => {
      console.log("---> ", data)
   fetch(`${BASE_URL}/user/login`, {
     method: "POST",
@@ -14,6 +14,7 @@ const login = (data) => {
           localStorage.setItem("refreshToken", data.refreshToken);
           localStorage.setItem("accessToken", data.accessToken);
           localStorage.setItem("uid", data.uid);
+          window.location.replace("/")
      })
   }).catch(err => {
        console.log(err)
