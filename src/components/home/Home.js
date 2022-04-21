@@ -1,21 +1,19 @@
-import { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import React from "react";
+import { Container, Grid, Typography } from "@mui/material";
+import { TopPlaces } from "../Places/TopPlaces";
+import { Header } from "../ui/Header";
 
-export const Home = ()=> {
-     const navigate = useNavigate();
 
-     useEffect(()=> {
-          const uid = localStorage.getItem("uid");
-          if(!uid) {
-               navigate('/login')
-          }
-     }, [])
-     // const uid = localStorage.getItem("uid");
-     // if(!uid) {
-     //      console.log("-----> ", uid)
-     //      navigate('/login')
-     // }
-     return (
-          <h1>This is home</h1>
-     )
-}
+export const Home = () => {
+  return (
+    <React.Fragment>
+      <Header />
+      <Grid className="home__container" mt={2}>
+          <h4 className="home__heading">Inspiration for your next trip</h4>
+          <div className="topPlaces__container">
+            <TopPlaces/>
+          </div>
+      </Grid>
+    </React.Fragment>
+  );
+};

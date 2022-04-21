@@ -42,13 +42,17 @@ export const Login = () => {
     if (email !== "" && password !== "") {
       // ----- set loading true here ------
       login(newCredentials)
-      setLoggedIn(true)
-      navigate(from, { replace: true });
-      // return <Navigate to="/" state={{ from: location }} replace />
     } else {
       setHelperText("missing credentials");
     }
   };
+
+  // useEffect(()=> {
+  //   const uid = localStorage.getItem("uid")
+  //   if(uid && uid !== undefined) {
+  //     navigate('/', { replace: true });
+  //   }
+  // }, [])
 
   return (
     <>
