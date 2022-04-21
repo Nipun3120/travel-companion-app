@@ -128,21 +128,16 @@
 }
 
 /* --------------- HOME --------------- */
-.home__container{
+.home__container {
   margin-top: 1.5rem;
   padding: 0 6rem;
 }
 .home__heading {
   font-weight: 500;
-  color: red;
+  color: #000;
   font-size: 2.5rem;
   text-align: left;
-  
 }
-
-
-
-
 
 /* ------------ TOP PLACES --------------- */
 .topPlaces__container {
@@ -150,17 +145,17 @@
   /* height: 20%; */
 }
 
-
 /* ------ place card ------  */
 
-.placeCard__wrapper  {
+.placeCard__wrapper {
   font-family: inherit !important;
   font-size: inherit !important;
   line-height: inherit !important;
   font-weight: inherit !important;
   border-radius: 0px !important;
   outline: none !important;
-  transition: box-shadow 0.2s ease 0s, -ms-transform 0.1s ease 0s, -webkit-transform 0.1s ease 0s, transform 0.1s ease 0s !important;
+  transition: box-shadow 0.2s ease 0s, -ms-transform 0.1s ease 0s,
+    -webkit-transform 0.1s ease 0s, transform 0.1s ease 0s !important;
   -webkit-tap-highlight-color: transparent !important;
   background: transparent !important;
   border: none !important;
@@ -193,7 +188,7 @@
   width: 100%;
 }
 
-.placesCard__info{
+.placesCard__info {
   margin-top: -9px;
   border-radius: 10px;
   padding: 20px;
@@ -201,7 +196,6 @@
   border: 1;
   background-color: #282c34;
 }
-
 
 .placesCard__info > h2 {
   font-size: 18px;
@@ -215,3 +209,101 @@
   margin-top: 8px;
   margin-bottom: 8px;
 } */
+
+/* -------------- HEADER ---------- */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  width: 100%;
+  height: 80px;
+  box-shadow: 0 1px 2px rgb(0 0 0 / 8%), 0 4px 12px rgb(0 0 0 / 5%);
+}
+.header__left {
+  /* flex: 1 */
+  position: absolute;
+  left: 5%;
+
+}
+
+.header__icon {
+  object-fit: contain;
+  height: 100px;
+  color: #ff385b;
+  font-size: 2.5rem;
+}
+
+.header__center {
+  display: flex;
+  /* flex: 2; */
+  align-items: center;
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%);
+  max-width: fit-content;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* background-color: lightgrey; */
+}
+.header__center_1:hover {
+  cursor: text;
+}
+
+.header__searchInput {
+  position: relative;
+  /* background-color: lightgrey; */
+  padding: 15px 40px 15px 20px;
+  width: 20px;
+  color: #525252;
+  text-transform: uppercase;
+  font-size: 16px;
+  letter-spacing: 2px;
+  border: none;
+  border-radius: 30px;
+  background: linear-gradient(to right, #ffffff 0%, #464747 #f9f9f9 100%);
+  transition: width 0.4s ease;
+  outline: none;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.195), 0 4px 12px rgba(0, 0, 0, 0.157);
+}
+
+.header__searchInput:focus {
+  width: 300px;
+}
+.searchIcon {
+  position: relative;
+  left: -42px;
+  color: #ff7779;
+  /* font-size: 48px; */
+}
+
+
+.MuiAvatar-circular {
+  border: 1px solid #dddddd;
+  color: #717171;
+  transition: 0.8 ease-in;
+}
+.header__userIcon:hover, .header__userIcon:active {
+  cursor: pointer;
+  box-shadow: #00000070 2px 4px 12px;
+}
+
+.header__right {
+  display: flex;
+  align-items: center;
+  position: absolute;
+  right: -10%;
+  transform: translate(-50%);
+  justify-content: space-between;
+  width: 15vw;
+  margin-right: 80px;
+}
+
+.header__menuItem:hover{
+  cursor: pointer;
+}

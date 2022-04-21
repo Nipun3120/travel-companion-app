@@ -1,8 +1,10 @@
-import { Navigate, Outlet } from "react-router-dom";
-import { useLoggedInStatus } from "../contexts/userLoggedInStatus";
+import { Outlet, useLocation, Navigate } from "react-router-dom";
 
-export const PrivateRoute = ()=> {
-     const { isLoggedIn } = useLoggedInStatus();
-     console.log( isLoggedIn )
-     return isLoggedIn ? <Outlet/> : <Navigate to="/login" />
+// instead of doing it with state, 
+// checking if uid exist, if yes, user is loggedIn else not
+
+export const PrivateRoute = () => {
+    const location = useLocation();
+     const  uid = localStorage.getItem("uid") || false;
+    return uid ? <Outlet/> : <Navigate to="/login" state={{from: location}}/>;
 }
