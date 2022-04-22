@@ -2,6 +2,7 @@ import React from "react";
 import { Container, Grid, Typography } from "@mui/material";
 import { TopPlaces } from "../Places/TopPlaces";
 import { Header } from "../ui/Header";
+import { Travel } from "../travel/Travel";
 
 
 export const Home = () => {
@@ -9,9 +10,11 @@ export const Home = () => {
     <React.Fragment>
       <Header />
       <Grid className="home__container" mt={2}>
-          <h4 className="home__heading">Inspiration for your next trip</h4>
           <div className="topPlaces__container">
             <TopPlaces/>
+          </div>
+          <div className="w-full" style={{marginTop: '30px'}}>
+            <Travel />
           </div>
       </Grid>
     </React.Fragment>
