@@ -2,23 +2,25 @@ import axios from "axios";
 import { BASE_URL } from "../config/api";
 
 const login = async (data) => {
-     console.log("---> ", data)
+  console.log("---> ", data);
   fetch(`${BASE_URL}/user/login`, {
     method: "POST",
     headers: {
-     'Content-Type': 'application/json'
-   },
+      "Content-Type": "application/json",
+    },
     body: JSON.stringify(data),
-  }).then((res)=> {
-     res.json().then(data => {
-          localStorage.setItem("refreshToken", data.refreshToken);
-          localStorage.setItem("accessToken", data.accessToken);
-          localStorage.setItem("uid", data.uid);
-          window.location.replace("/")
-     })
-  }).catch(err => {
-       console.log(err)
-  });
+  })
+    .then((res) => {
+      res.json().then((data) => {
+        localStorage.setItem("refreshToken", data.refreshToken);
+        localStorage.setItem("accessToken", data.accessToken);
+        localStorage.setItem("uid", data.uid);
+        window.location.replace("/");
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+    });
 };
 
 const signup = ({ email, password, firstName, lastName }) => {};
