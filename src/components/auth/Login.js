@@ -12,7 +12,7 @@ import { useLoggedInStatus } from "../../contexts/userLoggedInStatus";
 import { Container } from "@mui/material";
 import { Box } from "@mui/system";
 
-import { LockClosedIcon } from '@heroicons/react/solid'
+import { LockClosedIcon } from "@heroicons/react/solid";
 import { login } from "../../api/user";
 
 export const Login = () => {
@@ -32,16 +32,16 @@ export const Login = () => {
     setUserName(e.target.value);
   };
   const handlePasswordChange = (e) => {
-    e.preventDefault()
+    e.preventDefault();
     setPassword(e.target.value);
   };
 
-  console.log("fromm", from)
+  console.log("fromm", from);
   const checkCredentials = async () => {
     const newCredentials = { email, password };
     if (email !== "" && password !== "") {
       // ----- set loading true here ------
-      login(newCredentials)
+      login(newCredentials);
     } else {
       setHelperText("missing credentials");
     }
@@ -64,7 +64,9 @@ export const Login = () => {
               src="https://tailwindui.com/img/logos/workflow-mark-indigo-600.svg"
               alt="Workflow"
             />
-            <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">Sign in to your account</h2>
+            <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
+              Sign in to your account
+            </h2>
             {/* <p className="mt-2 text-center text-sm text-gray-600">
               Or{' '}
               <a href="#" className="font-medium text-indigo-600 hover:text-indigo-500">
@@ -115,13 +117,19 @@ export const Login = () => {
                   type="checkbox"
                   className="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded"
                 />
-                <label htmlFor="remember-me" className="ml-2 block text-sm text-gray-900">
+                <label
+                  htmlFor="remember-me"
+                  className="ml-2 block text-sm text-gray-900"
+                >
                   Remember me
                 </label>
               </div>
 
               <div className="text-sm">
-                <a href="#" className="font-medium text-indigo-600 hover:text-indigo-500">
+                <a
+                  href="#"
+                  className="font-medium text-indigo-600 hover:text-indigo-500"
+                >
                   Forgot your password?
                 </a>
               </div>
@@ -134,7 +142,10 @@ export const Login = () => {
                 onClick={checkCredentials}
               >
                 <span className="absolute left-0 inset-y-0 flex items-center pl-3">
-                  <LockClosedIcon className="h-5 w-5 text-indigo-500 group-hover:text-indigo-400" aria-hidden="true" />
+                  <LockClosedIcon
+                    className="h-5 w-5 text-indigo-500 group-hover:text-indigo-400"
+                    aria-hidden="true"
+                  />
                 </span>
                 Sign in
               </button>
