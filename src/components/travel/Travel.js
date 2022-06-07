@@ -1,7 +1,8 @@
-import { Box, Container } from "@mui/material";
+import { Box, Container, TextField } from "@mui/material";
 import React from "react";
 import { useSelector } from "react-redux";
 import SearchPage from "./Search";
+import { SearchMain } from "./SearchMain";
 import { TopBar } from "./TopBar";
 
 export const Travel = () => {
@@ -14,7 +15,7 @@ export const Travel = () => {
       <Box>
         <TopBar />
         <div className="bg-neutral-300 rounded-2xl p-2 m-4 flex flex-auto shadow-lg mt-4">
-          <div className="flex-1">{mode}</div>
+          <SearchMain mode={mode}/>
         </div>
       </Box>
     </React.Fragment>

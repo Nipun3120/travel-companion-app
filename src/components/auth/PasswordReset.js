@@ -1,11 +1,5 @@
 import { useState, useEffect } from "react";
-import {
-  useNavigate,
-  Link,
-  useLocation,
-  Navigate,
-  NavLink,
-} from "react-router-dom";
+import { useNavigate, Link, useLocation, Navigate } from "react-router-dom";
 import axios from "axios";
 import { BASE_URL } from "../../config/api";
 import FormControl from "@mui/material/FormControl";
@@ -21,7 +15,7 @@ import { Box } from "@mui/system";
 import { LockClosedIcon } from "@heroicons/react/solid";
 import { login } from "../../api/user";
 
-export const Login = () => {
+export const PasswordReset = () => {
   const { currentUser, setCurrentUser } = useCurrentUserContext();
   const { isLoggedIn, setLoggedIn } = useLoggedInStatus();
   let navigate = useNavigate();
@@ -29,37 +23,21 @@ export const Login = () => {
 
   let from = location.state?.from?.pathname || "/";
 
-  const [username, setUserName] = useState("");
-  const [password, setPassword] = useState("");
+  const [email, setUserName] = useState("");
   const [helperText, setHelperText] = useState("");
 
-  const handleNameChange = (e) => {
-    e.preventDefault();
-    setUserName(e.target.value);
-  };
-  const handlePasswordChange = (e) => {
-    e.preventDefault();
-    setPassword(e.target.value);
-  };
-
-  console.log("fromm", from);
   const checkCredentials = async () => {
-    const newCredentials = { username, password };
-    if (username !== "" && password !== "") {
+    const newCredentials = { email };
+    if (email !== "") {
       // ----- set loading true here ------
-      console.log("hi");
-      login(newCredentials);
+      //  login(newCredentials);
+      // ------ SEND PASS CHANGE REQUEST TO SERVER
+      // ------ GENERATE RESET LINK AND SEND TO REGISTERED EMAIL AND SEND UID IN IT
+      // ------ stack/google
     } else {
-      setHelperText("missing credentials");
+      setHelperText("Enter username please");
     }
   };
-
-  // useEffect(()=> {
-  //   const uid = localStorage.getItem("uid")
-  //   if(uid && uid !== undefined) {
-  //     navigate('/', { replace: true });
-  //   }
-  // }, [])
 
   return (
     <>
@@ -72,7 +50,7 @@ export const Login = () => {
               alt="Workflow"
             />
             <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
-              Sign in to your account
+              Reset Your Password
             </h2>
             {/* <p className="mt-2 text-center text-sm text-gray-600">
               Or{' '}
@@ -96,10 +74,10 @@ export const Login = () => {
                   required
                   className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
                   placeholder="Username"
-                  onChange={handleNameChange}
+                  onChange={(e) => setUserName(e.targer.value)}
                 />
               </div>
-              <div>
+              {/* <div>
                 <label htmlFor="password" className="sr-only">
                   Password
                 </label>
@@ -113,11 +91,11 @@ export const Login = () => {
                   placeholder="Password"
                   onChange={handlePasswordChange}
                 />
-              </div>
+              </div> */}
             </div>
 
             <div className="flex items-center justify-between">
-              <div className="flex items-center">
+              {/* <div className="flex items-center">
                 <input
                   id="remember-me"
                   name="remember-me"
@@ -130,15 +108,15 @@ export const Login = () => {
                 >
                   Remember me
                 </label>
-              </div>
+              </div> */}
 
               <div className="text-sm">
                 <Link
-                  to="/login/password_reset"
+                  to="/"
                   className="font-medium text-indigo-600 hover:text-indigo-500"
-                  // onClick={navigate("password_reset", { replace: true })}
+                  //    onClick={navigate("/login", { replace: true })}
                 >
-                  Forgot your password?
+                  Login
                 </Link>
               </div>
             </div>
