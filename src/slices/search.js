@@ -4,7 +4,7 @@ const searchSlice = createSlice({
   name: "search",
   initialState: {
     searchField: "",
-    searchMode: "",
+    searchMode: "Location",
   },
   reducers: {
     setSearch: (state, action) => {

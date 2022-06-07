@@ -23,7 +23,20 @@ const login = async (data) => {
     });
 };
 
-const signup = ({ email, password, firstName, lastName }) => {};
+const signup = async (data) => {
+  console.log("signup--> ", data);
+  fetch(`${BASE_URL}/user/register`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "Application/json",
+    },
+    body: JSON.stringify(data),
+  }).then((res) => {
+    res.json().then((user) => {
+      window.location.replace("/login");
+    });
+  });
+};
 
 const getUserFromId = (uid, accessToken) => {
   if (accessToken) {
