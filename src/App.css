@@ -46,7 +46,6 @@
   text-align: left;
 }
 
-
 /*  ----- card ----- */
 .card {
   margin: 10px;
@@ -217,18 +216,18 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  position: sticky;
+  position: fixed;
   top: 0;
   z-index: 100;
   width: 100%;
   height: 80px;
+  background-color: #fff;
   box-shadow: 0 1px 2px rgb(0 0 0 / 8%), 0 4px 12px rgb(0 0 0 / 5%);
 }
 .header__left {
   /* flex: 1 */
   position: absolute;
   left: 5%;
-
 }
 
 .header__icon {
@@ -284,13 +283,13 @@
   /* font-size: 48px; */
 }
 
-
 .MuiAvatar-circular {
   border: 1px solid #dddddd;
   color: #717171;
   transition: 0.8 ease-in;
 }
-.header__userIcon:hover, .header__userIcon:active {
+.header__userIcon:hover,
+.header__userIcon:active {
   cursor: pointer;
   box-shadow: #00000070 2px 4px 12px;
 }
@@ -306,11 +305,9 @@
   margin-right: 80px;
 }
 
-.header__menuItem:hover{
+.header__menuItem:hover {
   cursor: pointer;
 }
-
-
 
 /* -------------------------- TRAVEL COMPONENT -------------------------- */
 /* .travel__component {
@@ -318,7 +315,7 @@
   width: 100%;
 
 } */
-.travel__fullstop{
+.travel__fullstop {
   font-size: 3.2rem;
   color: #ff385b;
 }
@@ -327,35 +324,24 @@
 /* .travel__topbarWrapper{
 
 } */
-.travel__searchMode{
+.travel__searchMode {
   transition: transform 100ms ease-in;
 }
 
-.travel__searchMode:hover{
+.travel__searchMode:hover {
   transform: scale(1.1);
   color: #ff385b;
 }
 
-
-
-
-
-
-
-
-
-
-
-
-/* --------------------------------------------- */
+/* ------------------ SEARCH -------------------------- */
 .searchPage__info {
   padding: 20px;
 }
 
-.searchPage__info > p {
+/* .searchPage__info > p {
   margin-bottom: 10px;
   font-size: 14px;
-}
+} */
 
 .searchPage__info > h1 {
   margin-bottom: 30px;
@@ -365,6 +351,14 @@
   border-radius: 30px;
   text-transform: inherit;
   margin: 5px;
+}
+
+.searchResult__infoTop-desc {
+  margin-top: 10px;
+  font-size: 13px;
+  color: gray;
+  line-height: 1.2em;
+  /* word-spacing: 1px; */
 }
 
 /* ------------------- */
@@ -403,11 +397,13 @@
 
 .searchResult__infoTop {
   width: 40vw;
+  text-align: left;
 }
 
 .searchResult__infoTop > h3 {
-  font-weight: 300;
+  font-weight: bold;
   margin-top: 10px;
+  font-size: 1.2rem;
 }
 
 .searchResult__infoTop > p {
@@ -421,19 +417,13 @@
   justify-content: space-between;
 }
 
-
 .searchResult__star {
   color: red;
 }
 
-
 .searchResult__stars {
   display: flex;
   align-items: center;
-}
-
-.searchResults__price > p {
-  text-align: right;
 }
 
 .searchResults__price {
@@ -442,5 +432,11 @@
   right: 30px;
 }
 
+.searchResults__price > p {
+  text-align: right;
+}
 
-
+.searchResults__price > h2 {
+  font-weight: bold;
+  font-size: 1.5rem;
+}

@@ -6,6 +6,7 @@ import LanguageIcon from "@mui/icons-material/Language";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { Avatar } from "@mui/material";
 import { Link } from "react-router-dom";
+import BedIcon from "@mui/icons-material/Bed";
 
 import Box from "@mui/material/Box";
 // import Avatar from '@mui/material/Avatar';
@@ -96,6 +97,10 @@ export const Header = () => {
           </MenuItem>
           <MenuItem className="header__menuItem">
             <Avatar /> My Trips
+          </MenuItem>
+          <MenuItem className="header__menuItem">
+            <BedIcon style={{ marginRight: "12.5px" }} />
+            <Link to="/search">Houses</Link>
           </MenuItem>
           <Divider />
           {/* <MenuItem className="header__menuItem">

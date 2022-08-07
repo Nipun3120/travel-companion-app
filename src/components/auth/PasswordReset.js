@@ -13,7 +13,7 @@ import { Container } from "@mui/material";
 import { Box } from "@mui/system";
 
 import { LockClosedIcon } from "@heroicons/react/solid";
-import { login } from "../../api/user";
+import { login, passwordReset } from "../../api/user";
 
 export const PasswordReset = () => {
   const { currentUser, setCurrentUser } = useCurrentUserContext();
@@ -23,17 +23,20 @@ export const PasswordReset = () => {
 
   let from = location.state?.from?.pathname || "/";
 
-  const [email, setUserName] = useState("");
+  const [username, setUserName] = useState("");
   const [helperText, setHelperText] = useState("");
 
-  const checkCredentials = async () => {
-    const newCredentials = { email };
-    if (email !== "") {
+  const checkCredentials = () => {
+    const newCredentials = { username };
+    if (username !== "") {
       // ----- set loading true here ------
       //  login(newCredentials);
       // ------ SEND PASS CHANGE REQUEST TO SERVER
       // ------ GENERATE RESET LINK AND SEND TO REGISTERED EMAIL AND SEND UID IN IT
       // ------ stack/google
+      Promise.all([passwordReset(newCredentials)]).then((res) => {
+        console.log(res);
+      });
     } else {
       setHelperText("Enter username please");
     }
@@ -74,7 +77,7 @@ export const PasswordReset = () => {
                   required
                   className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
                   placeholder="Username"
-                  onChange={(e) => setUserName(e.targer.value)}
+                  onChange={(e) => setUserName(e.target.value)}
                 />
               </div>
               {/* <div>
