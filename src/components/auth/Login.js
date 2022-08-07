@@ -21,6 +21,9 @@ import { Box } from "@mui/system";
 import { LockClosedIcon } from "@heroicons/react/solid";
 import { login } from "../../api/user";
 
+const validRegex =
+  /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+
 export const Login = () => {
   const { currentUser, setCurrentUser } = useCurrentUserContext();
   const { isLoggedIn, setLoggedIn } = useLoggedInStatus();
@@ -31,7 +34,7 @@ export const Login = () => {
 
   const [username, setUserName] = useState("");
   const [password, setPassword] = useState("");
-  const [helperText, setHelperText] = useState("");
+  const [helperText, setHelperText] = useState({ isTrue: false, message: "" });
 
   const handleNameChange = (e) => {
     e.preventDefault();
@@ -43,14 +46,21 @@ export const Login = () => {
   };
 
   console.log("fromm", from);
-  const checkCredentials = async () => {
-    const newCredentials = { username, password };
-    if (username !== "" && password !== "") {
-      // ----- set loading true here ------
-      console.log("hi");
-      login(newCredentials);
+  const checkCredentials = () => {
+    if (username.match(validRegex)) {
+      setHelperText({
+        message: "please enter username, instead of email",
+        isTrue: true,
+      });
     } else {
-      setHelperText("missing credentials");
+      setHelperText({ message: "", isTrue: false });
+      const newCredentials = { username, password };
+      if (username !== "" && password !== "") {
+        // ----- set loading true here ------
+        login(newCredentials);
+      } else {
+        setHelperText({ message: "missing credentials", isTrue: true });
+      }
     }
   };
 
@@ -60,6 +70,21 @@ export const Login = () => {
   //     navigate('/', { replace: true });
   //   }
   // }, [])
+
+  // useEffect(() => {
+  //   const listener = async (event) => {
+  //     if (event.code === "Enter" || event.code === "NumpadEnter") {
+  //       console.log("Enter key was pressed. Run your function.");
+  //       event.preventDefault();
+  //       // callMyFunction();
+  //       await checkCredentials();
+  //     }
+  //   };
+  //   document.addEventListener("keydown", listener);
+  //   return () => {
+  //     document.removeEventListener("keydown", listener);
+  //   };
+  // }, []);
 
   return (
     <>
@@ -158,7 +183,9 @@ export const Login = () => {
                 Sign in
               </button>
             </div>
-            {helperText && <p className="text-red-500">{helperText}</p>}
+            {helperText.isTrue && (
+              <p className="text-red-500">{helperText.message}</p>
+            )}
           </form>
         </div>
       </div>

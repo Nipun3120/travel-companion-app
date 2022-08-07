@@ -128,4 +128,12 @@ router.get("/get-all-users", async (req, res) => {
   res.status(200).json({ data });
 });
 
+router.post("/password_reset", async (req, res) => {
+  const { username } = req.body;
+  const user = await User.findOne({ username });
+  console.log(user);
+  if (user) return res.status(200).json({ message: "email sent" });
+  else return res.status(404).json({ message: "Username not found" });
+});
+
 module.exports = router;

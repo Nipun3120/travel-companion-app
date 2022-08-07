@@ -54,4 +54,28 @@ const getUserFromId = (uid, accessToken) => {
   }
 };
 
-export { login, signup, getUserFromId };
+const passwordReset = async (username) => {
+  fetch(`${BASE_URL}/user/password_reset`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "Application/json",
+    },
+    body: JSON.stringify(username),
+  })
+    .then((res) => {
+      console.log("res", res);
+      res.json().then((message) => {
+        console.log("message ", message.message);
+        return message.message;
+      });
+    })
+    .catch((err) => {
+      console.error("err", err);
+      err.json().then((message) => {
+        console.log("error ", message.message);
+        return message.message;
+      });
+    });
+};
+
+export { login, signup, getUserFromId, passwordReset };
