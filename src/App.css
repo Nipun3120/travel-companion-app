@@ -37,6 +37,11 @@
   }
 }
 
+.home__section {
+  display: flex;
+  padding: 30px;
+}
+
 /* -----------------***-------------- styles -------------***------------------ */
 
 .component__heading {
@@ -93,28 +98,43 @@
     center center;
   height: 50vh;
   position: relative;
+  width: 100%;
+  margin-top: 80px;
 }
 
 .banner__info {
   background-color: black;
   color: white;
+  height: 50vh;
   padding-top: 25vh;
-  padding-left: 50px;
+  padding-left: 5rem;
   padding-right: 50px;
-  padding-bottom: 40px;
-  width: 300px;
+  padding-bottom: 5vh;
+  width: 450px;
+  text-align: left;
+  border-bottom-right-radius: 10px;
+  line-height: normal;
 }
 
 .banner__search {
   display: flex;
   flex-direction: column;
 }
-
+.banner__searchButton,
+.banner__search,
+.css-1rwt2y5-MuiButtonBase-root-MuiButton-root {
+  border: none;
+}
 .banner__searchButton {
   background-color: white !important;
   font-weight: 900 !important;
   text-transform: inherit !important;
   color: #ff7779 !important;
+}
+
+.banner__info > h1 {
+  font-size: 2rem;
+  font-weight: bolder;
 }
 
 .banner__info > button {
@@ -132,6 +152,7 @@
 
 .banner__info > h5 {
   margin-top: 10px;
+  color: rgba(194, 194, 194, 0.595);
 }
 
 /* --------------- HOME --------------- */
@@ -445,4 +466,63 @@
 .searchResults__price > h2 {
   font-weight: bold;
   font-size: 1.5rem;
+}
+
+/* -------------------- SEARCH DATE -------------------- */
+
+.search {
+  position: absolute;
+  top: 35px;
+  left: 25%;
+  width: 100vw;
+}
+.search .search_rangePicker {
+  transform: translate(-75%);
+}
+
+.search_people {
+  position: absolute;
+  width: 558px;
+  background-color: #fff;
+  left: 22.5px;
+  margin-top: 1.7rem;
+  display: flex;
+  flex-direction: column;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
+
+.search_people > h2 {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem;
+  background-color: white;
+  font-weight: bold;
+  font-size: 1.6rem;
+}
+
+.search_people > input {
+  margin: 2px auto;
+  width: 520px;
+  padding: 20px;
+  height: 30px;
+  border: none;
+  font-size: 0.8rem;
+}
+
+.search_people > input:focus {
+  outline-width: 0;
+}
+
+.search_people > button {
+  text-transform: inherit !important;
+  background-color: #ff7779;
+  color: white;
+  width: 558px;
+}
+
+.search_people > button:hover {
+  background-color: white;
+  color: #ff7779;
 }

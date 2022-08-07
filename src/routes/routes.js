@@ -1,7 +1,14 @@
 import React from "react";
 import { Route, Routes } from "react-router-dom";
-import { Home, PasswordReset, SearchPage, Signup } from "../components";
+import {
+  TripHost,
+  Home,
+  PasswordReset,
+  SearchPage,
+  Signup,
+} from "../components";
 import { Login } from "../components/auth/Login";
+import Banner from "../components/ui/Banner";
 import { Header } from "../components/ui/Header";
 import { PrivateRoute } from "./PrivateRoutes";
 
@@ -9,10 +16,12 @@ export const getAppropriateRoutes = () => {
   return (
     <>
       <Header />
+      {/* <Banner /> */}
       <Routes>
         <Route path="/" element={<PrivateRoute />}>
           <Route path="" element={<Home />} />
           <Route path="/search" element={<SearchPage />} />
+          <Route path="/create-your-own-trip" element={<TripHost />} />
         </Route>
 
         <Route path="/login/password_reset" element={<PasswordReset />} />
