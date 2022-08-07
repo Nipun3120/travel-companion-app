@@ -49,7 +49,9 @@ export const Header = () => {
       </div>
 
       <div className="header__right">
-        <p>Become a host</p>
+        <p>
+          <Link to="/search">Become a host</Link>
+        </p>
         <LanguageIcon />
         <Avatar
           onClick={handleClick}
