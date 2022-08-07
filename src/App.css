@@ -222,7 +222,7 @@
   width: 100%;
   height: 80px;
   background-color: #fff;
-  box-shadow: 0 1px 2px rgb(0 0 0 / 8%), 0 4px 12px rgb(0 0 0 / 5%);
+  /* box-shadow: 0 1px 2px rgb(0 0 0 / 8%), 0 4px 12px rgb(0 0 0 / 5%); */
 }
 .header__left {
   /* flex: 1 */
@@ -334,17 +334,23 @@
 }
 
 /* ------------------ SEARCH -------------------------- */
+.searchPage {
+  margin-top: 100px;
+  text-align: left;
+}
 .searchPage__info {
   padding: 20px;
 }
 
-/* .searchPage__info > p {
+.searchPage__info > p {
   margin-bottom: 10px;
   font-size: 14px;
-} */
+}
 
 .searchPage__info > h1 {
   margin-bottom: 30px;
+  font-size: 2rem;
+  font-weight: bold;
 }
 
 .searchPage__info > button {
