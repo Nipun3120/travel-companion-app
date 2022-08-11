@@ -29,7 +29,9 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "clone": "cd backend && git checkout master && git pull https://github.com/Nipun3120/travel-app-backend master && cd ..",
+    "backendPull": "cd backend && git pull origin master && cd .."
   },
   "eslintConfig": {
     "extends": [
