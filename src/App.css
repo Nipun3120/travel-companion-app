@@ -326,6 +326,15 @@
   margin-right: 80px;
 }
 
+.header__right > p {
+  padding: 10px;
+}
+
+.header__right > p:hover {
+  background-color: rgba(139, 139, 139, 0.135);
+  border-radius: 30px;
+}
+
 .header__menuItem:hover {
   cursor: pointer;
 }
