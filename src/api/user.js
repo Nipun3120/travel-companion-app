@@ -1,9 +1,25 @@
 import axios from "axios";
 import { BASE_URL } from "../config/api";
+import { configOptions } from "../config/configOptions";
+import { AUTH } from "../config/constants";
+
+const resetAccess = async (refreshToken, options) => {
+  const result = await axios({
+    method: "get",
+    url: `${BASE_URL}/user/renew-access-token`,
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: { refreshToken },
+  });
+
+  localStorage.setItem("accessToken", result.data.accessToken);
+  configOptions(options);
+};
 
 const login = async (data) => {
   console.log("---> ", data);
-  fetch(`${BASE_URL}/user/login`, {
+  return fetch(`${BASE_URL}/user/login`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -11,12 +27,15 @@ const login = async (data) => {
     body: JSON.stringify(data),
   })
     .then((res) => {
-      res.json().then((data) => {
-        localStorage.setItem("refreshToken", data.refreshToken);
-        localStorage.setItem("accessToken", data.accessToken);
-        localStorage.setItem("uid", data.uid);
-        window.location.replace("/");
-      });
+      return res;
+      // res.json().then((data) => {
+      //   console.log("data, in api: ", data);
+      //   return data;
+      //   // localStorage.setItem("refreshToken", data.refreshToken);
+      //   // localStorage.setItem("accessToken", data.accessToken);
+      //   // localStorage.setItem("uid", data.uid);
+      //   // window.location.replace("/");
+      // });
     })
     .catch((err) => {
       console.log(err);
@@ -78,4 +97,53 @@ const passwordReset = async (username) => {
     });
 };
 
-export { login, signup, getUserFromId, passwordReset };
+const loginUsingToken = async (accessToken, refreshToken) => {
+  const result = await axios({
+    method: "get",
+    url: `${BASE_URL}/user/loginUsingToken`,
+    headers: {
+      authorization: `Bearer ${accessToken}`,
+    },
+  });
+
+  if (result.body.ok) {
+    window.location.replace("/");
+  } else {
+    if (result.body.refresh) {
+      resetAccess(refreshToken, AUTH.LOGIN);
+    }
+  }
+};
+
+const userLogout = async (accessToken, option) => {
+  const result = await axios({
+    method: "POST",
+    url: `${BASE_URL}/user/logout`,
+    headers: {
+      authorization: `Bearer ${accessToken}`,
+    },
+  });
+  configOptions(option);
+};
+
+const logoutUser = async (accessToken) => {
+  fetch(`${BASE_URL}/user/logout`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "Application/json",
+    },
+    body: JSON.stringify(accessToken),
+  }).then(() => {
+    console.log(accessToken);
+  });
+};
+
+export {
+  login,
+  signup,
+  getUserFromId,
+  passwordReset,
+  loginUsingToken,
+  userLogout,
+  logoutUser,
+};

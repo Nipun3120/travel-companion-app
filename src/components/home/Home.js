@@ -4,10 +4,12 @@ import { TopPlaces } from "../Places/TopPlaces";
 import { Travel } from "../travel/Travel";
 import Banner from "../ui/Banner";
 import Card from "../ui/Card";
+import { Header } from "../ui/Header";
 
 export const Home = () => {
   return (
     <div className="home">
+      <Header />
       <Banner />
 
       <div className="home__section">

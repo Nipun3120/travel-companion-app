@@ -19,7 +19,7 @@ import { Container } from "@mui/material";
 import { Box } from "@mui/system";
 
 import { LockClosedIcon } from "@heroicons/react/solid";
-import { login } from "../../api/user";
+import { login, loginUsingToken } from "../../api/user";
 
 const validRegex =
   /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
@@ -46,30 +46,46 @@ export const Login = () => {
   };
 
   console.log("fromm", from);
-  const checkCredentials = () => {
-    if (username.match(validRegex)) {
-      setHelperText({
-        message: "please enter username, instead of email",
-        isTrue: true,
-      });
-    } else {
-      setHelperText({ message: "", isTrue: false });
-      const newCredentials = { username, password };
-      if (username !== "" && password !== "") {
-        // ----- set loading true here ------
-        login(newCredentials);
-      } else {
-        setHelperText({ message: "missing credentials", isTrue: true });
-      }
-    }
-  };
-
-  // useEffect(()=> {
-  //   const uid = localStorage.getItem("uid")
-  //   if(uid && uid !== undefined) {
-  //     navigate('/', { replace: true });
+  // const checkCredentials = async () => {
+  //   if (username.match(validRegex)) {
+  //     setHelperText({
+  //       message: "please enter username, instead of email",
+  //       isTrue: true,
+  //     });
+  //   } else {
+  //     setHelperText({ message: "", isTrue: false });
+  //     const newCredentials = { username, password };
+  //     if (username !== "" && password !== "") {
+  //       login(newCredentials).then((data) => {
+  //         console.log("data, in login component ", data);
+  //         if (data.ok) {
+  //           setLoggedIn(true);
+  //           localStorage.setItem("refreshToken", data.refreshToken);
+  //           localStorage.setItem("accessToken", data.accessToken);
+  //           localStorage.setItem("uid", data.uid);
+  //           navigate("/");
+  //         } else {
+  //           setHelperText({ message: "Login failed, try again", isTrue: true });
+  //         }
+  //       });
+  //     } else {
+  //       setHelperText({ message: "missing credentials", isTrue: true });
+  //     }
   //   }
-  // }, [])
+  // };
+
+  useEffect(() => {
+    const uid = localStorage.getItem("uid");
+    const accessToken = localStorage.getItem("accessToken");
+    const refreshToken = localStorage.getItem("refreshToken");
+    if (accessToken) {
+      localStorage.removeItem("accessToken");
+      loginUsingToken(accessToken, refreshToken);
+    }
+    if (uid && uid !== undefined) {
+      navigate("/", { replace: true });
+    }
+  }, []);
 
   // useEffect(() => {
   //   const listener = async (event) => {
@@ -85,6 +101,36 @@ export const Login = () => {
   //     document.removeEventListener("keydown", listener);
   //   };
   // }, []);
+
+  const loginHandler = async (event) => {
+    event.preventDefault();
+    if (username.match(validRegex)) {
+      setHelperText({
+        message: "please enter your username, instead of email",
+        isTrue: true,
+      });
+    } else {
+      setHelperText({ message: "", isTrue: false });
+      const newCredentials = { username, password };
+      if (username !== "" && password !== "") {
+        const res = await login(newCredentials);
+        res.json().then((data) => {
+          console.log("data, in login component ", data);
+          if (data.ok) {
+            setLoggedIn(true);
+            localStorage.setItem("refreshToken", data.refreshToken);
+            localStorage.setItem("accessToken", data.accessToken);
+            localStorage.setItem("uid", data.uid);
+            navigate("/");
+          } else {
+            setHelperText({ message: "Login failed, try again", isTrue: true });
+          }
+        });
+      } else {
+        setHelperText({ message: "missing credentials", isTrue: true });
+      }
+    }
+  };
 
   return (
     <>
@@ -106,7 +152,7 @@ export const Login = () => {
               </a>
             </p> */}
           </div>
-          <form className="mt-8 space-y-6">
+          <form className="mt-8 space-y-6" onSubmit={loginHandler}>
             <input type="hidden" name="remember" defaultValue="true" />
             <div className="rounded-md shadow-sm -space-y-px">
               <div>
@@ -170,9 +216,9 @@ export const Login = () => {
 
             <div>
               <button
-                type="button"
+                type="submit"
                 className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-                onClick={checkCredentials}
+                // onClick={checkCredentials}
               >
                 <span className="absolute left-0 inset-y-0 flex items-center pl-3">
                   <LockClosedIcon

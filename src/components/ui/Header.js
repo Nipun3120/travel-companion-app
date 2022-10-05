@@ -19,8 +19,10 @@ import Typography from "@mui/material/Typography";
 import Tooltip from "@mui/material/Tooltip";
 import Settings from "@mui/icons-material/Settings";
 import Logout from "@mui/icons-material/Logout";
+import { useLoggedInStatus } from "../../contexts/userLoggedInStatus";
 
 export const Header = () => {
+  const { isLoggedIn, setLoggedIn } = useLoggedInStatus();
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
   const handleClick = (event) => {
@@ -28,6 +30,12 @@ export const Header = () => {
   };
   const handleClose = () => {
     setAnchorEl(null);
+  };
+
+  const logoutHandler = (event) => {
+    event.preventDefault();
+    setLoggedIn(false);
+    logout();
   };
 
   return (
@@ -116,7 +124,7 @@ export const Header = () => {
             </ListItemIcon>
             Settings
           </MenuItem>
-          <MenuItem onClick={() => logout()} className="header__menuItem">
+          <MenuItem onClick={logoutHandler} className="header__menuItem">
             <ListItemIcon>
               <Logout fontSize="small" />
             </ListItemIcon>

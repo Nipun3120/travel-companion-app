@@ -15,7 +15,6 @@ import { PrivateRoute } from "./PrivateRoutes";
 export const getAppropriateRoutes = () => {
   return (
     <>
-      <Header />
       {/* <Banner /> */}
       <Routes>
         <Route path="/" element={<PrivateRoute />}>
